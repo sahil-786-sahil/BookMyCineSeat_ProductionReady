@@ -39,6 +39,9 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             .requestMatchers(HttpMethod.GET, "/api/v1/movies/**").permitAll()
             .requestMatchers(HttpMethod.GET, "/api/v1/shows/**").permitAll()
             .requestMatchers(HttpMethod.GET, "/api/v1/screens/**").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/movies/**", "/api/shows/**").permitAll()
+            .requestMatchers("/api/users/register", "/api/users/login").permitAll()
+             .requestMatchers("/api/bookings/**").authenticated()
             
             // 4. LOCK everything else! (Booking seats, making payments requires a token)
             // Any POST request to /api/v1/bookings will automatically demand Login/Signup
