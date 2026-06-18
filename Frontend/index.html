@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BookMyCineSeat — Book cinema seats for blockbusters, indie gems, and everything in between.">
+<title>BookMyCineSeat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── AMBIENT BACKGROUND ── -->
+<div class="home-ambient" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- ── LIVE TICKER ── -->
+<div class="ticker-bar" aria-hidden="true">
+  <div class="ticker-inner">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<nav class="nav" id="mainNav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#" onclick="showPage('home'); return false;" aria-label="BookMyCineSeat home">
+      <div class="logo-icon" aria-hidden="true">🎬</div>
+      <span>BookMyCineSeat</span>
+    </a>
+    <div class="nav-divider" aria-hidden="true"></div>
+    <nav class="nav-links" aria-label="Site navigation">
+      <a class="nav-link" href="#" data-page="movies" onclick="showPage('movies'); return false;">Movies</a>
+      <a class="nav-link" href="#" data-page="shows" onclick="showPage('shows'); return false;">Shows</a>
+    </nav>
+    <div class="nav-actions" id="navActions">
+      <!-- rendered by JS -->
+    </div>
+  </div>
+</nav>
+
+<!-- ── TOAST ── -->
+<div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+<!-- ── PAGES ── -->
+<main id="appRoot">
+
+  <!-- ════════════════ HOME ════════════════ -->
+  <div id="page-home" class="page">
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          Now Showing in Cinemas Near You
+        </div>
+        <h1 class="hero-title" id="hero-heading">
+          Cinema<br>starts<br><span class="accent">here.</span>
+        </h1>
+        <p class="hero-sub">
+          Book the perfect seat for any film — blockbusters, award winners, midnight screenings. Instant confirmation, zero faff.
+        </p>
+        <div class="hero-cta">
+          <button class="btn btn-primary btn-lg" onclick="showPage('movies')">Browse Movies</button>
+          <button class="btn btn-outline btn-lg" onclick="showPage('shows')">View Shows</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num"><span data-count="2400" data-suffix="+">2400+</span></div>
+            <div class="stat-label">Shows monthly</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num"><span data-count="180" data-suffix="+">180+</span></div>
+            <div class="stat-label">Screens</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num"><span data-count="98" data-suffix="%">98%</span></div>
+            <div class="stat-label">Happy bookers</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual Card Stack -->
+      <div class="hero-visual" aria-hidden="true">
+        <div class="card-stack">
+          <div class="stack-card stack-card-3"></div>
+          <div class="stack-card stack-card-2"></div>
+          <div class="stack-card stack-card-1">
+            <div class="card-1-inner">
+              <div class="card-poster-area">
+                🎥
+                <div class="card-now">NOW SHOWING</div>
+              </div>
+              <div class="card-title">The Grand Illusion</div>
+              <div class="card-meta">
+                <span>🕗 7:30 PM</span>
+                <span>🏛 Screen 3</span>
+                <span>🎭 Drama</span>
+              </div>
+              <div class="seat-row-demo">
+                <div class="sdot b"></div><div class="sdot b"></div>
+                <div class="sdot a"></div><div class="sdot a"></div>
+                <div class="sdot s"></div><div class="sdot s"></div>
+                <div class="sdot a"></div><div class="sdot a"></div>
+              </div>
+              <button class="btn btn-primary" style="width:100%" onclick="showPage('movies')">Book Now →</button>
+            </div>
+          </div>
+        </div>
+        <div class="float-badge float-badge-1">
+          <div class="badge-num">347</div>
+          <div class="badge-label">seats booked today</div>
+        </div>
+        <div class="float-badge float-badge-2">
+          <div style="font-size:11px;color:var(--muted)">Avg. booking time</div>
+          <div class="badge-num" style="font-size:17px;color:var(--amber)">42 sec</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Now Playing -->
+    <section class="section" aria-labelledby="now-playing-title">
+      <div class="section-header">
+        <div>
+          <div class="section-eyebrow">This Week</div>
+          <h2 class="section-title" id="now-playing-title">Now Playing</h2>
+        </div>
+        <a href="#" class="section-link" onclick="showPage('movies'); return false;">
+          All movies <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <div class="movies-grid" id="homeMoviesGrid" aria-label="Featured movies">
+        <div class="movie-skeleton"></div>
+        <div class="movie-skeleton"></div>
+        <div class="movie-skeleton"></div>
+        <div class="movie-skeleton"></div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <div class="features-strip" role="list" aria-label="Why book with us">
+      <div class="features-inner">
+        <div class="feature-cell" role="listitem">
+          <div class="feature-icon-wrap" aria-hidden="true">⚡</div>
+          <h3>Instant Booking</h3>
+          <p>Reserve your seat in seconds. Real-time availability so you never chase a ghost ticket.</p>
+        </div>
+        <div class="feature-cell" role="listitem">
+          <div class="feature-icon-wrap" aria-hidden="true">🔒</div>
+          <h3>Secure & Private</h3>
+          <p>JWT-backed authentication and encrypted payment flows keep your data yours alone.</p>
+        </div>
+        <div class="feature-cell" role="listitem">
+          <div class="feature-icon-wrap" aria-hidden="true">🎟️</div>
+          <h3>Flexible Plans Change</h3>
+          <p>Life happens. Cancel before the show and walk away with a full refund, no questions asked.</p>
+        </div>
+        <div class="feature-cell" role="listitem">
+          <div class="feature-icon-wrap" aria-hidden="true">📱</div>
+          <h3>Any Device</h3>
+          <p>From desktop to phone, your ticket travels with you. Show the QR at the door and walk in.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-home -->
+
+
+  <!-- ════════════════ MOVIES PAGE ════════════════ -->
+  <div id="page-movies" class="page">
+    <div class="page-container">
+      <div class="page-hd">
+        <div class="page-hd-inner">
+          <h1 class="page-title">All Movies</h1>
+          <div class="search-wrap">
+            <input type="search" id="movieSearch" class="search-input"
+              placeholder="Search title or genre…"
+              oninput="filterMovies()"
+              aria-label="Search movies">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+          </div>
+        </div>
+        <div class="filter-row" id="genreTabs" role="group" aria-label="Filter by genre">
+          <button class="filter-chip active" onclick="filterByGenre('', this)">All</button>
+        </div>
+      </div>
+      <div class="movies-grid" id="allMoviesGrid" aria-label="Movie listing">
+        <div class="movie-skeleton"></div><div class="movie-skeleton"></div>
+        <div class="movie-skeleton"></div><div class="movie-skeleton"></div>
+        <div class="movie-skeleton"></div><div class="movie-skeleton"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════ MOVIE DETAIL ════════════════ -->
+  <div id="page-movie-detail" class="page">
+    <div id="movieDetailContent"></div>
+  </div>
+
+
+  <!-- ════════════════ ALL SHOWS PAGE ════════════════ -->
+  <div id="page-shows" class="page">
+    <div class="page-container">
+      <h1 class="page-title">All Shows</h1>
+      <div id="allShowsList">
+        <div class="spinner-wrap"><div class="spinner"></div><p>Loading shows…</p></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════ SEAT SELECTION ════════════════ -->
+  <div id="page-seat-select" class="page">
+    <div class="page-container narrow">
+      <div id="seatSelectionContent"></div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════ LOGIN ════════════════ -->
+  <div id="page-login" class="page">
+    <div class="auth-outer">
+      <div class="auth-bg-orb" aria-hidden="true"></div>
+      <div class="auth-card">
+        <div class="auth-logo-wrap">
+          <div class="auth-logo-icon" aria-hidden="true">🎬</div>
+        </div>
+        <h2 class="auth-title">Welcome back</h2>
+        <p class="auth-sub">Sign in to your BookMyCineSeat account</p>
+        <form onsubmit="handleLogin(event)" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" class="form-input"
+              placeholder="you@example.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" class="form-input"
+              placeholder="••••••••" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="loginBtn">Sign In</button>
+        </form>
+        <p class="auth-footer">
+          No account? <a href="#" onclick="showPage('register'); return false;">Register free</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════ REGISTER ════════════════ -->
+  <div id="page-register" class="page">
+    <div class="auth-outer">
+      <div class="auth-bg-orb" aria-hidden="true"></div>
+      <div class="auth-card">
+        <div class="auth-logo-wrap">
+          <div class="auth-logo-icon" aria-hidden="true">🎬</div>
+        </div>
+        <h2 class="auth-title">Create account</h2>
+        <p class="auth-sub">Join BookMyCineSeat — it's free</p>
+        <form onsubmit="handleRegister(event)" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="regName">Full Name</label>
+            <input type="text" id="regName" class="form-input"
+              placeholder="Arjun Sharma" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regEmail">Email</label>
+            <input type="email" id="regEmail" class="form-input"
+              placeholder="you@example.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regPhone">Phone Number</label>
+            <input type="tel" id="regPhone" class="form-input"
+              placeholder="+91 9876543210" required autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regPassword">Password</label>
+            <input type="password" id="regPassword" class="form-input"
+              placeholder="Min. 8 characters" required autocomplete="new-password" minlength="8">
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="registerBtn">Create Account</button>
+        </form>
+        <p class="auth-footer">
+          Already a member? <a href="#" onclick="showPage('login'); return false;">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════ BOOKING CONFIRM ════════════════ -->
+  <div id="page-booking-confirm" class="page">
+    <div class="page-container narrow">
+      <div id="bookingConfirmContent"></div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════ MY BOOKINGS ════════════════ -->
+  <div id="page-my-bookings" class="page">
+    <div class="page-container">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap;gap:16px">
+        <h1 class="page-title" style="margin-bottom:0">My Bookings</h1>
+        <button class="btn btn-outline" onclick="showPage('movies')">+ Book More</button>
+      </div>
+      <div id="myBookingsList">
+        <div class="spinner-wrap"><div class="spinner"></div><p>Loading bookings…</p></div>
+      </div>
+    </div>
+  </div>
+
+</main><!-- /appRoot -->
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="footer-logo">🎬 BookMyCineSeat</span>
+    <nav class="footer-links" aria-label="Footer links">
+      <a href="#" onclick="showPage('movies'); return false;">Movies</a>
+      <a href="#" onclick="showPage('shows'); return false;">Shows</a>
+      <a href="#" onclick="showPage('login'); return false;">Sign in</a>
+    </nav>
+    <span class="footer-copy">© 2025 · Built with Spring Boot + JWT</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
